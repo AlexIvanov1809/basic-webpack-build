@@ -9,7 +9,6 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MinifyCssNames = require("mini-css-class-name/css-loader");
 const ObsoleteWebpackPlugin = require("obsolete-webpack-plugin");
-const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const svgToMiniDataURI = require("mini-svg-data-uri");
 const path = require("path");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
@@ -35,7 +34,7 @@ module.exports = function (env, argv) {
       errorDetails: true,
     },
     // entryPoint for webpack; it can be object with key-value pairs for multibuild (https://webpack.js.org/concepts/entry-points/)
-    entry: path.resolve(srcPath, "index.tsx"),
+    entry: path.resolve(srcPath, "main.tsx"),
 
     output: {
       path: destPath,
@@ -265,10 +264,6 @@ module.exports = function (env, argv) {
         name: "obsolete",
         promptOnNonTargetBrowser: true, // show popup if browser is not listed in .browserlistrc
         // optional: browser: [template: 'html string here']
-      }),
-      new ScriptExtHtmlWebpackPlugin({
-        // it adds to obsolete-plugin-script 'async' tag (for perfomance puprpose)
-        async: "obsolete",
       }),
       // optional: new BundleAnalyzerPlugin() // creates bundles-map in browser https://github.com/webpack-contrib/webpack-bundle-analyzer
     ],
